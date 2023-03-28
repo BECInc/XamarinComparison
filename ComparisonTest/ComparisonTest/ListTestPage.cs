@@ -29,15 +29,15 @@ namespace ComparisonTest
                 },
                 Children =
                 {
-                new ListView ()
-                {
-                    Style = MarkupStyles.FillLayoutStyle,
-                    RowHeight = 100,
-                    SeparatorVisibility = SeparatorVisibility.None,
-                    Footer = new Label(),
-                    ItemsSource = thingies,
-                    ItemTemplate =  new CustomTemplateSelector()
-                }
+                    new ListView ()
+                    {
+                        Style = MarkupStyles.FillLayoutStyle,
+                        RowHeight = 100,
+                        SeparatorVisibility = SeparatorVisibility.None,
+                        Footer = new Label(),
+                        ItemsSource = thingies,
+                        ItemTemplate =  new CustomTemplateSelector()
+                    }
                 }
 
             };

@@ -7,7 +7,7 @@ namespace ComparisonTest
 	public class AnimationTestPage : ContentPage
 	{
         private Grid animationGrid;
-        private int gridSideLength = 15;
+        private int gridSideLength = 16;
         private uint animationLength = 2000;
 
         public AnimationTestPage()
@@ -68,6 +68,8 @@ namespace ComparisonTest
                         new RowDefinition { Height = GridLength.Star },
                         new RowDefinition { Height = GridLength.Star },
                         new RowDefinition { Height = GridLength.Star },
+                        new RowDefinition { Height = GridLength.Star },
+
                         new RowDefinition { Height = GridLength.Star }
                     },
 
@@ -89,6 +91,8 @@ namespace ComparisonTest
                         new ColumnDefinition { Width = GridLength.Star },
                         new ColumnDefinition { Width = GridLength.Star },
                         new ColumnDefinition { Width = GridLength.Star },
+                        new ColumnDefinition { Width = GridLength.Star },
+
                         new ColumnDefinition { Width = GridLength.Star }
                     },
                 }
@@ -102,13 +106,27 @@ namespace ComparisonTest
             {
                 for (var b = 0; b < gridSideLength; b++)
                 {
-                    var box = new BoxView
+                    var internalGrid = new Grid
                     {
                         Style = MarkupStyles.FillLayoutStyle,
-                        Color = (b % 2) == 0 ? Color.Red : Color.Blue
-                    }.Row(a).Col(b);
+                        ColumnDefinitions =
+                        {
+                            new ColumnDefinition { Width = GridLength.Star }
+                        },
+                        Children =
+                        {
+                            new BoxView
+                            {
+                                Style = MarkupStyles.FillLayoutStyle,
+                                Color = Color.Red
+                            }
+                                .Row(0).Col(0),
 
-                    animationGrid.Children.Add(box);
+                        }
+                    }
+                        .Row(a).Col(b);
+
+                    animationGrid.Children.Add(internalGrid);
                 }
             }
         }

@@ -122,15 +122,54 @@ namespace ComparisonTest
 
         void AssignGridItems()
         {
-            for(var a = 0; a < 25; a++)
+            for (var a = 0; a < 25; a++)
             {
-                for(var b = 0; b < 25; b++)
+                for (var b = 0; b < 25; b++)
                 {
-                    grid.Children.Add(new BoxView
+                    var internalGrid = new Grid
                     {
                         Style = MarkupStyles.FillLayoutStyle,
-                        Color = (b % 2) == 0 ? Color.Red : Color.Blue
-                    }, b, a);
+                        RowDefinitions =
+                    {
+                        new RowDefinition { Height = GridLength.Star },
+                        new RowDefinition { Height = GridLength.Star }
+                    },
+                        ColumnDefinitions =
+                    {
+                        new ColumnDefinition { Width = GridLength.Star },
+                        new ColumnDefinition { Width = GridLength.Star }
+                    },
+                        Children =
+                    {
+                        new BoxView
+                        {
+                            Style = MarkupStyles.FillLayoutStyle,
+                            Color = Color.Red
+                        }
+                            .Row(0).Col(0),
+                        new BoxView
+                        {
+                            Style = MarkupStyles.FillLayoutStyle,
+                            Color = Color.Blue
+                        }
+                            .Row(0).Col(1),
+                        new BoxView
+                        {
+                            Style = MarkupStyles.FillLayoutStyle,
+                            Color = Color.Blue
+                        }
+                            .Row(1).Col(0),
+                        new BoxView
+                        {
+                            Style = MarkupStyles.FillLayoutStyle,
+                            Color = Color.Red
+                        }
+                            .Row(1).Col(1),
+                    }
+                    }
+                        .Row(a).Col(b);
+
+                    grid.Children.Add(internalGrid);
                 }
             }
         }
